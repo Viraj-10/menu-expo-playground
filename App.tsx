@@ -5,6 +5,10 @@ import {
   ButtonText,
   Center,
   GluestackUIProvider,
+  Modal,
+  ModalBackdrop,
+  ModalContent,
+  Text,
 } from "@gluestack-ui/themed";
 
 import { Menu, MenuItem, MenuItemLabel } from "./Menu";
@@ -19,9 +23,19 @@ export default function App() {
 }
 
 const Home = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Center flex={1}>
       <MenuWrapper />
+      <Button onPress={() => setIsOpen(!isOpen)}>
+        <ButtonText>Open</ButtonText>
+      </Button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <ModalBackdrop />
+        <ModalContent>
+          <Text>Hello World</Text>
+        </ModalContent>
+      </Modal>
     </Center>
   );
 };
@@ -31,9 +45,10 @@ const MenuWrapper = () => {
 
   return (
     <Menu
-      selectionMode="single"
+      selectionMode="multiple"
       selectedKeys={selected}
       onSelectionChange={(selections) => {
+        console.log("🚀 ~ MenuWrapper ~ selections:", selections);
         setSelected(selections as Set<Key>);
       }}
       trigger={({ ...triggerProps }) => {

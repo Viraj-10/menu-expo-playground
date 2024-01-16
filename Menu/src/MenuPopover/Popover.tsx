@@ -1,10 +1,10 @@
-import React from 'react';
-import { useControllableState } from '@gluestack-ui/hooks';
-import { Overlay } from '@gluestack-ui/overlay';
-import { PopoverProvider } from './PopoverContext';
-import { FocusScope as FocusScopeAria } from '@react-native-aria/focus';
-import { PopoverContent } from './PopoverContent';
-import { MenuContext } from '../MenuContext';
+import React from "react";
+import { useControllableState } from "@gluestack-ui/hooks";
+import { Overlay } from "@gluestack-ui/overlay";
+import { PopoverProvider } from "./PopoverContext";
+import { FocusScope as FocusScopeAria } from "@react-native-aria/focus";
+import { PopoverContent } from "./PopoverContent";
+import { MenuContext } from "../MenuContext";
 export const Popover = ({
   state,
   onOpen,
@@ -15,12 +15,11 @@ export const Popover = ({
   finalFocusRef,
   useRNModal,
   trapFocus = true,
-  placement = 'bottom',
+  placement = "bottom",
   shouldOverlapWithTrigger = false,
   crossOffset,
   offset,
   triggerRef,
-  AnimatePresence,
   shouldFlip,
   focusScope = true,
   StyledBackdrop,
@@ -39,7 +38,7 @@ export const Popover = ({
 
   let idCounter = 0;
 
-  function uniqueId(prefix = '') {
+  function uniqueId(prefix = "") {
     const id = ++idCounter;
     return prefix + id;
   }
@@ -62,11 +61,11 @@ export const Popover = ({
     if (trigger) {
       return trigger(
         {
-          'ref': reference,
-          'onPress': handleOpen,
-          'aria-expanded': isOpen ? true : false,
-          'aria-controls': isOpen ? popoverContentId : undefined,
-          'aria-haspopup': true,
+          ref: reference,
+          onPress: handleOpen,
+          "aria-expanded": isOpen ? true : false,
+          "aria-controls": isOpen ? popoverContentId : undefined,
+          "aria-haspopup": true,
         },
         { open: isOpen }
       );
@@ -90,7 +89,7 @@ export const Popover = ({
           value={{
             onClose: handleClose,
             targetRef,
-            strategy: 'absolute',
+            strategy: "absolute",
             handleClose: handleClose,
             initialFocusRef,
             finalFocusRef,
@@ -118,9 +117,7 @@ export const Popover = ({
             aria-hidden={true}
           />
           <FocusScopeComponent trapFocus={trapFocus} focusScope={focusScope}>
-            <PopoverContent AnimatePresence={AnimatePresence}>
-              {children}
-            </PopoverContent>
+            <PopoverContent>{children}</PopoverContent>
           </FocusScopeComponent>
         </PopoverProvider>
       </Overlay>
